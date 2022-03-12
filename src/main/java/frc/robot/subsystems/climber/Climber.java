@@ -31,4 +31,12 @@ public class Climber {
         rightClimberIO.setPercentPower(percent);
     }
 
+    public void setLeftPosition(double position){
+        leftClimberIO.setPercentPower(position);
+    }
+
+    public void setRightPosition(double position){
+        rightClimberIO.setPercentPower(position);
+    }
+
 }

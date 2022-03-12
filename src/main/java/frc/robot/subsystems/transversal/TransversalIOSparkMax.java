@@ -1,8 +1,8 @@
 package frc.robot.subsystems.transversal;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import frc.robot.Constants;
 
 public class TransversalIOSparkMax implements TransversalIO{
