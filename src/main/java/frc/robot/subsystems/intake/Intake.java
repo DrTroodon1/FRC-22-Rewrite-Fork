@@ -17,8 +17,16 @@ public class Intake extends SubsystemBase {
         intakeIO.runIntakeVelocity(velocity);
     }
 
+    public void runIntakePercent(double percent) {
+        intakeIO.runIntakePercent(percent);
+    }
+
     public void runIntakeVoltage(double voltage) {
         intakeIO.runIntakeVoltage(voltage);
+    }
+
+    public void getIntakeVelocity() {
+        intakeIO.getIntakeVelocity();
     }
 
     public void stop() {

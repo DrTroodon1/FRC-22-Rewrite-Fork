@@ -15,6 +15,7 @@ import frc.robot.commands.operatorcommands.TeleIntake;
 import frc.robot.commands.operatorcommands.TeleIntakeToggle;
 import frc.robot.commands.operatorcommands.TeleShoot;
 import frc.robot.commands.operatorcommands.TeleShootStop;
+import frc.robot.commands.operatorcommands.TeleUptake;
 import frc.robot.oi.UserControls;
 import frc.robot.oi.XboxUserControls;
 import frc.robot.subsystems.climber.Climber;
@@ -24,7 +25,6 @@ import frc.robot.subsystems.drivetrain.DriveIOFalcon;
 import frc.robot.subsystems.flywheel.FlyWheel;
 import frc.robot.subsystems.flywheel.FlyWheelIONonVariable;
 import frc.robot.subsystems.intake.Intake;
-import frc.robot.subsystems.intake.IntakeIO;
 import frc.robot.subsystems.intake.IntakeIOTalonSRX;
 import frc.robot.subsystems.transversal.Transversal;
 import frc.robot.subsystems.transversal.TransversalIOSparkMax;
@@ -50,6 +50,7 @@ public class RobotContainer {
   private final FlyWheel flyWheel = new FlyWheel(new FlyWheelIONonVariable());
   private final Transversal transversal = new Transversal(new TransversalIOSparkMax());
   private final Uptake uptake = new Uptake(new UptakeIOSparkMax());
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -76,23 +77,23 @@ public class RobotContainer {
         () -> controls.getLeftDriveX(),
         () -> controls.getLeftDriveY(),
         () -> controls.getRightDriveX(),
-        () -> controls.getRightDriveY()
-        );
+        () -> controls.getRightDriveY());
 
-        TeleShoot shootCommand = new TeleShoot(flyWheel, 
-        transversal, 
-        uptake, 
-        () -> controls.defaultVoltage()
-        );
+    TeleShoot shootCommand = new TeleShoot(flyWheel,
+        transversal,
+        uptake,
+        () -> controls.defaultVoltage());
 
-        TeleShootStop shootStopCommand = new TeleShootStop(flyWheel, 
-        transversal, 
-        uptake, 
-        () -> controls.zeroValue()
-        );
-        
-        TeleIntake defaultIntakeCommand = new TeleIntake(intake,
+    TeleShootStop shootStopCommand = new TeleShootStop(flyWheel,
+        transversal,
+        uptake,
+        () -> controls.zeroValue());
+
+    TeleIntake defaultIntakeCommand = new TeleIntake(intake,
         () -> controls.getIntakeSpeed());
+
+    TeleUptake defaultUptakeCommand = new TeleUptake(uptake,
+        () -> controls.getUptakeSpeed());
 
     TeleClimbUp climberUpCommand = new TeleClimbUp(climber);
     TeleClimbDown climberDownCommand = new TeleClimbDown(climber);
@@ -101,12 +102,14 @@ public class RobotContainer {
     // Define default commands here
     drive.setDefaultCommand(defaultDriveCommand);
     intake.setDefaultCommand(defaultIntakeCommand);
+    uptake.setDefaultCommand(defaultUptakeCommand);
+
     // Define button / command bindings here
     controls.getClimbUp().whileActiveOnce(climberUpCommand);
     controls.getClimbDown().whileActiveOnce(climberDownCommand);
     controls.getShootButton().whenInactive(shootStopCommand);
     controls.getShootButton().whileActiveOnce(shootCommand);
-    controls.getIntakeExtendButton().whenActive(intakeToggleCommand, true);
+    controls.getIntakeExtendButton().whenActive(intakeToggleCommand);
   }
 
   /**

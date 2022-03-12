@@ -8,19 +8,20 @@ import frc.robot.subsystems.intake.Intake;
 public class TeleIntake extends CommandBase{
 
     private final Intake intake;
-    private final Supplier<Double> voltageSupplier;
+    private final Supplier<Double> percentSupplier;
 
-    public TeleIntake(Intake intake, Supplier<Double> voltageSupplier) {
+    public TeleIntake(Intake intake, Supplier<Double> percentSupplier) {
         this.intake = intake;
-        this.voltageSupplier = voltageSupplier;
+        this.percentSupplier = percentSupplier;
 
         addRequirements(intake);
     }
     
     @Override
     public void execute() {
-        double voltage = voltageSupplier.get();
-        intake.runIntakeVoltage(voltage);
+        double percent = percentSupplier.get();
+        intake.runIntakePercent(percent);
+        intake.getIntakeVelocity();
     }
 
     @Override

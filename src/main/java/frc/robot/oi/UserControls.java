@@ -19,7 +19,7 @@ public interface UserControls {
     return 0.0;
   }
 
-  public default double getCellStopSpeed() {
+  public default double getUptakeSpeed() {
     return 0.0;
   }
 

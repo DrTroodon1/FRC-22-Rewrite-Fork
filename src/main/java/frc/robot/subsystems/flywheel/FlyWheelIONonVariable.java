@@ -46,10 +46,10 @@ public class FlyWheelIONonVariable implements FlyWheelIO {
     public void setVelocity(double flyWheelRadPerSec,
             double topWheelRadPerSec, double flyFFVolts, double topFFVolts) {
 
-        double flyTicksPer100Ms = Units.radiansToRotations(flyWheelRadPerSec)
-                * encoderTicksPerRev / 10.0;
-        double topTicksPer100Ms = Units.radiansToRotations(topWheelRadPerSec)
-                * encoderTicksPerRev / 10.0;
+        double flyTicksPer100Ms = Units.radiansPerSecondToRotationsPerMinute(flyWheelRadPerSec)
+                * encoderTicksPerRev * 2048.0 / 10.0;
+        double topTicksPer100Ms = Units.radiansPerSecondToRotationsPerMinute(topWheelRadPerSec)
+                * encoderTicksPerRev * 2048.0 / 10.0;
         System.out.println(String.format("Flywheel: %.2f    Topwheel: %.2f    FlyFF: %.2f    TopFF: %.2f",
                 flyTicksPer100Ms, topTicksPer100Ms, flyFFVolts, topFFVolts));
         leftFlyWheel.set(ControlMode.Velocity, flyTicksPer100Ms, DemandType.ArbitraryFeedForward, flyFFVolts / 12.0);

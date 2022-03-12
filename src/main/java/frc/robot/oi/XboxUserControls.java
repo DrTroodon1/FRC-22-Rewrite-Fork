@@ -79,7 +79,7 @@ public class XboxUserControls implements UserControls {
     }
 
     @Override
-    public double getCellStopSpeed() {
+    public double getUptakeSpeed() {
         return operatorController.getLeftY();
     }
 

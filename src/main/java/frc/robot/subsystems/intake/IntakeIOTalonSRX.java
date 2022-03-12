@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import frc.robot.Constants;
 
 public class IntakeIOTalonSRX implements IntakeIO{
+    private static final double MAX_PERCENTAGE = 0.5;
     
     private WPI_TalonSRX intakeMotor;
     private DoubleSolenoid intakeArmSolenoid;
@@ -27,13 +28,23 @@ public class IntakeIOTalonSRX implements IntakeIO{
     }
 
     @Override
+    public void runIntakePercent(double percent){
+        intakeMotor.set(ControlMode.PercentOutput, percent * MAX_PERCENTAGE);
+    }
+
+    @Override
     public void runIntakeVoltage(double volts){
-        intakeMotor.set(ControlMode.PercentOutput, volts / 12);
+        intakeMotor.set(ControlMode.PercentOutput, volts * MAX_PERCENTAGE / 12);
     }
 
     @Override
     public void runIntakeVelocity(double velocity){
         intakeMotor.set(ControlMode.Velocity, velocity);
+    }
+
+    @Override
+    public void getIntakeVelocity(){
+        System.out.println(intakeMotor.getSelectedSensorVelocity());
     }
 
     @Override
