@@ -43,11 +43,6 @@ public class IntakeIOTalonSRX implements IntakeIO{
     }
 
     @Override
-    public void getIntakeVelocity(){
-        System.out.println(intakeMotor.getSelectedSensorVelocity());
-    }
-
-    @Override
     public void stopIntake(){
         intakeMotor.stopMotor();
     }

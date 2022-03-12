@@ -8,8 +8,6 @@ public interface IntakeIO {
     
     public default void runIntakeVelocity(double velocity){}
 
-    public default void getIntakeVelocity(){}
-
     public default void stopIntake(){}
 
     public default void setIntakeMotorBrakeMode(boolean enable){}

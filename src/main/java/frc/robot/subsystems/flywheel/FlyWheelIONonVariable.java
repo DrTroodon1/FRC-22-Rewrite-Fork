@@ -22,6 +22,12 @@ public class FlyWheelIONonVariable implements FlyWheelIO {
                 this.leftFlyWheel = new WPI_TalonFX(8);
                 this.rightFlyWheel = new WPI_TalonFX(9);
                 this.topFlyWheel = new WPI_TalonFX(10);
+
+                leftFlyWheel.configFactoryDefault(1);
+                rightFlyWheel.configFactoryDefault(1);
+                topFlyWheel.configFactoryDefault(1);
+
+                
                 break;
             case ROBOT_2022_PRACTICE:
             default:

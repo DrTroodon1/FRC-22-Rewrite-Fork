@@ -21,7 +21,6 @@ public class TeleIntake extends CommandBase{
     public void execute() {
         double percent = percentSupplier.get();
         intake.runIntakePercent(percent);
-        intake.getIntakeVelocity();
     }
 
     @Override

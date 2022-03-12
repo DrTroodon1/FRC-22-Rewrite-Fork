@@ -25,10 +25,6 @@ public class Intake extends SubsystemBase {
         intakeIO.runIntakeVoltage(voltage);
     }
 
-    public void getIntakeVelocity() {
-        intakeIO.getIntakeVelocity();
-    }
-
     public void stop() {
         intakeIO.stopIntake();
     }
