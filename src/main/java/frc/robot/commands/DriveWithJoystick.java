@@ -25,7 +25,7 @@ public class DriveWithJoystick extends CommandBase {
     private final AxisProcessor rightYProcessor = new AxisProcessor();
     
     // Remember to put this as TunableNumber
-    private static double deadband = 0.4;
+    private static double deadband = 0.1;
 
     /**
      * Creates a new ExampleCommand.
@@ -59,10 +59,10 @@ public class DriveWithJoystick extends CommandBase {
     @Override
     @SuppressWarnings("unused")
     public void execute() {
-        double leftXValue = leftXProcessor.process(leftXSupplier.get());
-        double leftYValue = leftXProcessor.process(leftYSupplier.get());
-        double rightXValue = leftXProcessor.process(rightXSupplier.get());
-        double rightYValue = leftXProcessor.process(rightYSupplier.get());
+        double leftXValue = leftXProcessor.process(leftXSupplier.get()); 
+        double leftYValue = leftYProcessor.process(leftYSupplier.get()) ;
+        double rightXValue = rightXProcessor.process(rightXSupplier.get());
+        double rightYValue = rightYProcessor.process(rightYSupplier.get());
 
         WheelSpeeds speeds = new WheelSpeeds(0.0, 0.0);
         switch(modeSupplier.get()) {
@@ -71,7 +71,7 @@ public class DriveWithJoystick extends CommandBase {
                 break;
 
             case ARCADE:
-                speeds = WheelSpeeds.fromArcade(leftYValue, rightXValue);
+                speeds = WheelSpeeds.fromArcade(leftYValue, rightXValue * 0.75);
                 break;
         }
 
@@ -119,12 +119,12 @@ public class DriveWithJoystick extends CommandBase {
                 scaledValue = (Math.abs(value) - deadband) / (1 - deadband);
                 scaledValue = Math.copySign(Math.pow(scaledValue, 2), value);
             }
-            TrapezoidProfile profile = new TrapezoidProfile(
-                // Replace with maxAcceleration and maxJerk
-                new TrapezoidProfile.Constraints(9999, 9999), 
-                new TrapezoidProfile.State(scaledValue, 0.0), state);
-            state = profile.calculate(Constants.loopPeriodSecs);
-            return state.position;
+            // TrapezoidProfile profile = new TrapezoidProfile(
+            //     // Replace with maxAcceleration and maxJerk
+            //     new TrapezoidProfile.Constraints(9999, 9999), 
+            //     new TrapezoidProfile.State(scaledValue, 0.0), state);
+            // state = profile.calculate(Constants.loopPeriodSecs);
+            return scaledValue;
         }
     }
 }

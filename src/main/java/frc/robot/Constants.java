@@ -28,7 +28,7 @@ public final class Constants {
         TANK, ARCADE
     }
 
-    public static final BotType bot = BotType.ROBOT_2022_COMP;
+    public static final BotType bot = BotType.ROBOT_2022_PRACTICE;
     public static final DriveMode mode = DriveMode.ARCADE;
 
     public static double loopPeriodSecs = 0.02;

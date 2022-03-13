@@ -19,7 +19,7 @@ public class XboxUserControls implements UserControls {
 
     @Override
     public double getLeftDriveY() {
-        return driverController.getLeftY();
+        return -driverController.getLeftY();
     }
 
     @Override
