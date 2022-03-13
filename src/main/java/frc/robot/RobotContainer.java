@@ -26,7 +26,7 @@ import frc.robot.oi.*;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveBase drive = new DriveBase(new DriveIOFalcon());
-  public final ColorSensor colorSensor = new ColorSensor(new ColorSensorIORevV3());
+  private final ColorSensor colorSensor = new ColorSensor(new ColorSensorIORevV3());
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
